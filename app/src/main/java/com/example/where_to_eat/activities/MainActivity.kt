@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
                 Log.d("Response", "onResponse: ${response.body()}")
                 if (response.isSuccessful){
                     val countryList  = response.body()!!
-                    Log.d("Response", "countrylist size : ${countryList.size}")
+                    Log.d("Response", "country list size : ${countryList.size}")
                     country_recycler.apply {
                         setHasFixedSize(true)
                         layoutManager = GridLayoutManager(this@MainActivity,2)

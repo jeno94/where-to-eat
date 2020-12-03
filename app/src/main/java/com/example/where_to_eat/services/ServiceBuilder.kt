@@ -4,12 +4,16 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class ServiceBuilder {
+object ServiceBuilder {
     //CREATE HTTP CLIENT
-    private val okHttp = OkHttpClient.Builder()
+
+
+    private const val URL ="http://opentable.herokuapp.com/api/"
+    //CREATE HTTP CLIENT
+    private val okHttp =OkHttpClient.Builder()
 
     //retrofit builder
-    private val builder = Retrofit.Builder().baseUrl(Companion.URL)
+    private val builder =Retrofit.Builder().baseUrl(URL)
         .addConverterFactory(GsonConverterFactory.create())
         .client(okHttp.build())
 
@@ -22,9 +26,5 @@ class ServiceBuilder {
 
     fun <T> buildService (serviceType :Class<T>):T{
         return retrofit.create(serviceType)
-    }
-
-    companion object {
-        private const val URL ="http://opentable.herokuapp.com/api/"
     }
 }

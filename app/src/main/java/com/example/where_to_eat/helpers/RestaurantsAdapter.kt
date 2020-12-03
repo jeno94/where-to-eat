@@ -15,7 +15,7 @@ class RestaurantsAdapter (private val restaurantsList: List<Restaurants>) : Recy
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
-        val view  = LayoutInflater.from(parent.context).inflate(R.layout.country_item,parent,false)
+        val view  = LayoutInflater.from(parent.context).inflate(R.layout.restaurant_element,parent,false)
         return ViewHolder(view)
     }
 
