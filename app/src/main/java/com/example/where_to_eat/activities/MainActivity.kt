@@ -14,11 +14,16 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import android.widget.Toast
+import androidx.fragment.app.Fragment
+import com.example.where_to_eat.fragments.ListingFragment
+import com.example.where_to_eat.fragments.ProfileFragment
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        initializeBottomNavigation()
 
         loadRestaurants()
 
@@ -49,4 +54,26 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
+
+    private fun initializeBottomNavigation(){
+        val listingFragment = ListingFragment();
+        val profileFragment = ProfileFragment();
+
+        makeCurrentFragment(listingFragment)
+
+        bottom_navigation.setOnClickListener{
+            when(it.id){
+                R.id.ic_listing -> makeCurrentFragment(listingFragment)
+                R.id.ic_profile -> makeCurrentFragment(profileFragment)
+            }
+            true
+
+        }
+    }
+
+    private fun makeCurrentFragment(fragment: Fragment)=
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.fl_wrapper, fragment)
+            commit()
+        }
 }
