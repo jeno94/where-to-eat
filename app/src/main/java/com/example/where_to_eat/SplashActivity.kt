@@ -1,10 +1,10 @@
-package com.example.where_to_eat.activities
+package com.example.where_to_eat
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import com.example.where_to_eat.R
+import com.example.where_to_eat.MainActivity
 
 class SplashActivity : AppCompatActivity() {
 

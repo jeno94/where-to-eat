@@ -1,7 +1,8 @@
 package com.example.where_to_eat.models
 
 data class Restaurants(
-    val current_page: Int,
+//    val current_page: Int,
+    val page: Int,
     val per_page: Int,
     val restaurants: List<Restaurant>,
     val total_entries: Int

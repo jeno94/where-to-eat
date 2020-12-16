@@ -8,7 +8,7 @@ object ServiceBuilder {
     //CREATE HTTP CLIENT
 
 
-    private const val URL ="http://opentable.herokuapp.com/api/"
+    private const val URL ="https://opentable.herokuapp.com/api"
     //CREATE HTTP CLIENT
     private val okHttp =OkHttpClient.Builder()
 
@@ -26,5 +26,10 @@ object ServiceBuilder {
 
     fun <T> buildService (serviceType :Class<T>):T{
         return retrofit.create(serviceType)
+
+
+
     }
+
+
 }

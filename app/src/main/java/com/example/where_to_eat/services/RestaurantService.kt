@@ -6,6 +6,8 @@ import retrofit2.http.GET
 
 interface RestaurantsService {
 
-    @GET("restaurants")
-    fun getRestaurantList () : Call<List<Restaurants>>
+//    @GET("restaurants?city=Chicago")
+    @GET("restaurants?city=Vail")
+    fun getRestaurantList () : Call<Restaurants>
+
 }
