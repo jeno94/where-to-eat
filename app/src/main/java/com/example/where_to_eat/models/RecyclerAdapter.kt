@@ -5,11 +5,12 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.where_to_eat.R
-import com.example.where_to_eat.models.Restaurants
 import com.example.where_to_eat.ui.listing.ListingFragment
+import com.squareup.picasso.Picasso
 
 class RecyclerAdapter (var mcontext:Context,  private val list: ArrayList<Restaurants.Restaurant>) : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
 
@@ -17,23 +18,25 @@ class RecyclerAdapter (var mcontext:Context,  private val list: ArrayList<Restau
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        var itemKode: TextView
-        var itemKategori: TextView
-        var itemIsi: TextView
+        var itemName: TextView
+        var itemAddress: TextView
+        var itemPrice: TextView
+        var itemImage: ImageView
 
         init {
-            itemKode = itemView.findViewById(R.id.kodePertanyaan)
-            itemKategori = itemView.findViewById(R.id.kategori)
-            itemIsi = itemView.findViewById(R.id.isiPertanyaan)
+            itemName = itemView.findViewById(R.id.restName)
+            itemAddress = itemView.findViewById(R.id.restPrice)
+            itemPrice = itemView.findViewById(R.id.restAddress)
+            itemImage = itemView.findViewById(R.id.restImage)
 
             itemView.setOnClickListener {
                 var position: Int = getAdapterPosition()
                 val context = itemView.context
                 val intent = Intent(context, ListingFragment::class.java).apply {
                     putExtra("NUMBER", position)
-                    putExtra("CODE", itemKode.text)
-                    putExtra("CATEGORY", itemKategori.text)
-                    putExtra("CONTENT", itemIsi.text)
+                    putExtra("CODE", itemName.text)
+                    putExtra("CATEGORY", itemAddress.text)
+                    putExtra("CONTENT", itemPrice.text)
                 }
                 context.startActivity(intent)
             }
@@ -47,9 +50,10 @@ class RecyclerAdapter (var mcontext:Context,  private val list: ArrayList<Restau
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, i: Int) {
-        viewHolder.itemKode.text = list[i].name
-        viewHolder.itemKategori.text = list[i].phone
-        viewHolder.itemIsi.text = list[i].state
+        viewHolder.itemName.text = list[i].name
+        viewHolder.itemAddress.text = list[i].phone
+        viewHolder.itemPrice.text = list[i].state
+        viewHolder.itemImage.(Picasso.get().load(list[i].image_url))
 
     }
 
