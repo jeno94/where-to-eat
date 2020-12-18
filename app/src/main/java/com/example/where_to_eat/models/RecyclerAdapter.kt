@@ -2,6 +2,9 @@ package com.example.where_to_eat.models
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +14,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.where_to_eat.R
 import com.example.where_to_eat.ui.listing.ListingFragment
 import com.squareup.picasso.Picasso
+import java.io.InputStream
+import java.net.HttpURLConnection
+import java.net.URL
 
 class RecyclerAdapter (var mcontext:Context,  private val list: ArrayList<Restaurants.Restaurant>) : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
 
@@ -53,11 +59,25 @@ class RecyclerAdapter (var mcontext:Context,  private val list: ArrayList<Restau
         viewHolder.itemName.text = list[i].name
         viewHolder.itemAddress.text = list[i].phone
         viewHolder.itemPrice.text = list[i].state
-        viewHolder.itemImage.(Picasso.get().load(list[i].image_url))
+        viewHolder.itemImage.setImageBitmap(getBitMapFromURL(list[i].image_url))
 
+        val item = list.get(viewHolder.absoluteAdapterPosition)
     }
 
     override fun getItemCount(): Int {
         return list.size
+    }
+
+    fun getBitMapFromURL(imageURL: String): Bitmap? {
+        var image: Bitmap? = null
+        try {
+            val `in` = java.net.URL(imageURL).openStream()
+            image = BitmapFactory.decodeStream(`in`)
+        }
+        catch (e: Exception) {
+            Log.e("Error Message", e.message.toString())
+            e.printStackTrace()
+        }
+        return image
     }
 }

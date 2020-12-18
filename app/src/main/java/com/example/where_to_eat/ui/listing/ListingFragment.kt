@@ -47,14 +47,18 @@ class ListingFragment : Fragment(), View.OnClickListener {
 
 //        val view: View = inflater.inflate(R.layout.fragment_listing, container, false)
         val view: View = inflater!!.inflate(R.layout.fragment_listing, container, false)
-//        val btn: Button = view.findViewById(R.id.favBtn)
-//        btn.setOnClickListener(this)
+        val btn: Button = view.findViewById(R.id.favBtn)
+
+        btn.setOnClickListener{
+            val item = adapter?.getItemId()
+        }
 
 
 //        return inflater.inflate(R.layout.fragment_listing, container, false)
 
         return view
     }
+    
 
     override fun onViewCreated(itemView: View, savedInstanceState: Bundle?) {
         super.onViewCreated(itemView, savedInstanceState)
@@ -173,3 +177,5 @@ class ListingFragment : Fragment(), View.OnClickListener {
         return restaurantList
     }
 }
+
+
