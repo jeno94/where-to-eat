@@ -8,19 +8,30 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Database
+import androidx.room.Room
 import com.example.where_to_eat.R
+import com.example.where_to_eat.helpers.DatabaseTest
 import com.example.where_to_eat.ui.listing.ListingFragment
-import com.squareup.picasso.Picasso
-import java.io.InputStream
-import java.net.HttpURLConnection
-import java.net.URL
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class RecyclerAdapter (var mcontext:Context,  private val list: ArrayList<Restaurants.Restaurant>) : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
+    val db = DatabaseTest.getDb(mcontext)
+    lateinit var favList: List<FavRestaurants>
 
-
+    init {
+        GlobalScope.launch {
+            favList = db.favRestaurantsDao().getAll()
+            favList.forEach(){
+                Log.d("DBBBBB ", "list element  ---->   $it")
+            }
+        }
+    }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -28,11 +39,11 @@ class RecyclerAdapter (var mcontext:Context,  private val list: ArrayList<Restau
         var itemAddress: TextView
         var itemPrice: TextView
         var itemImage: ImageView
-
+        var btn: Button
         init {
             itemName = itemView.findViewById(R.id.restName)
-            itemAddress = itemView.findViewById(R.id.restPrice)
-            itemPrice = itemView.findViewById(R.id.restAddress)
+            itemAddress = itemView.findViewById(R.id.restAddress)
+            itemPrice = itemView.findViewById(R.id.restPrice)
             itemImage = itemView.findViewById(R.id.restImage)
 
             itemView.setOnClickListener {
@@ -46,22 +57,41 @@ class RecyclerAdapter (var mcontext:Context,  private val list: ArrayList<Restau
                 }
                 context.startActivity(intent)
             }
+
+             btn = itemView.findViewById(R.id.favBtn)
+
         }
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ViewHolder {
         val v = LayoutInflater.from(viewGroup.context)
             .inflate(R.layout.restaurant_card, viewGroup, false)
+
+
         return ViewHolder(v)
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, i: Int) {
         viewHolder.itemName.text = list[i].name
-        viewHolder.itemAddress.text = list[i].phone
-        viewHolder.itemPrice.text = list[i].state
+        viewHolder.itemAddress.text = list[i].address
+        viewHolder.itemPrice.text = list[i].price.toString()
         viewHolder.itemImage.setImageBitmap(getBitMapFromURL(list[i].image_url))
 
-        val item = list.get(viewHolder.absoluteAdapterPosition)
+
+        val item = list[i]
+
+        viewHolder.btn.setOnClickListener(){
+
+            GlobalScope.launch {
+//              Save the restaurant ID into the DB,
+                db.favRestaurantsDao().insertAll(FavRestaurants(item.id))
+
+
+            }
+        }
+
+
+//        val item = list.get(viewHolder.absoluteAdapterPosition)
     }
 
     override fun getItemCount(): Int {
@@ -81,3 +111,6 @@ class RecyclerAdapter (var mcontext:Context,  private val list: ArrayList<Restau
         return image
     }
 }
+
+
+

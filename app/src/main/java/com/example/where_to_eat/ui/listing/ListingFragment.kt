@@ -3,6 +3,7 @@ package com.example.where_to_eat.ui.listing
 import android.os.Bundle
 import android.os.StrictMode
 import android.os.StrictMode.ThreadPolicy
+import android.util.Log
 import android.view.*
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
@@ -20,9 +21,12 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import android.widget.Button
 import android.widget.Toast
+import androidx.room.Room
+//import com.example.where_to_eat.models.AppDatabase
 import kotlinx.android.synthetic.main.restaurant_card.view.*
 
-class ListingFragment : Fragment(), View.OnClickListener {
+class ListingFragment : Fragment() {
+//    var btn: Button? = null
 
     private lateinit var listingViewModel: ListingViewModel
     private lateinit var restaurants: ArrayList<Restaurants.Restaurant>
@@ -34,6 +38,10 @@ class ListingFragment : Fragment(), View.OnClickListener {
     private var layoutManager: RecyclerView.LayoutManager? = null
     private var adapter: RecyclerView.Adapter<RecyclerAdapter.ViewHolder>? = null
 
+//    val db = Room.databaseBuilder(
+//            applicationContext,
+//            AppDatabase::class.java, "database-name"
+//    ).build()
 
 //    override fun onCreate(savedInstanceState: Bundle?) {
 //    }
@@ -47,11 +55,21 @@ class ListingFragment : Fragment(), View.OnClickListener {
 
 //        val view: View = inflater.inflate(R.layout.fragment_listing, container, false)
         val view: View = inflater!!.inflate(R.layout.fragment_listing, container, false)
-        val btn: Button = view.findViewById(R.id.favBtn)
+//        btn = view.findViewById(R.id.favBtn)
+//
+//        btn?.setOnClickListener{
+//            Log.d("Response", "country list size : $it")
+//
+//        }
 
-        btn.setOnClickListener{
-            val item = adapter?.getItemId()
-        }
+//    val clickListener = View.OnClickListener{ view->
+//        var x = null
+//        Log.d("Test", "view: ${view.id}")
+//    }
+//        btn?.setOnClickListener(clickListener)
+
+
+
 
 
 //        return inflater.inflate(R.layout.fragment_listing, container, false)
@@ -119,19 +137,17 @@ class ListingFragment : Fragment(), View.OnClickListener {
 //    }
 
 
-    fun getRestaurantsListAPI(): ArrayList<Restaurants.Restaurant> {
-        return restaurants
-    }
 
-    override fun onClick(v: View?) {
-        when (v?.id) {
-            R.id.favBtn -> {
 
-            }
-            else -> {
-            }
-        }
-    }
+//    override fun onClick(v: View?) {
+//        when (v?.id) {
+//            R.id.favBtn -> {
+//
+//            }
+//            else -> {
+//            }
+//        }
+//    }
     companion object {
         fun newInstance(): ListingFragment {
             return ListingFragment()

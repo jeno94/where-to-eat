@@ -44,6 +44,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:id="@+id/restPrice"
+                    android:textAlignment="textEnd"
                     android:layout_weight="1"/>
         </LinearLayout>
         <LinearLayout
@@ -61,7 +62,8 @@
                     android:layout_height="35dp" android:id="@+id/favBtn"
                     android:layout_weight="1"
                     android:background="@drawable/ic_favorite_shadow__24" android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"/>
+                    android:layout_marginTop="10dp"
+                    android:clickable="true" android:contextClickable="true"/>
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>
