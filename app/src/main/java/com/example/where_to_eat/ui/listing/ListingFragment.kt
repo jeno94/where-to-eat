@@ -3,27 +3,17 @@ package com.example.where_to_eat.ui.listing
 import android.os.Bundle
 import android.os.StrictMode
 import android.os.StrictMode.ThreadPolicy
-import android.util.Log
 import android.view.*
-import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.where_to_eat.models.Restaurants
-import com.example.where_to_eat.services.RestaurantsService
 import com.example.where_to_eat.R
 import com.example.where_to_eat.models.RecyclerAdapter
 import com.example.wheretoeat.ui.listing.ListingViewModel
 import kotlinx.android.synthetic.main.fragment_listing.*
-import okhttp3.OkHttpClient
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
-import android.widget.Button
-import android.widget.Toast
-import androidx.room.Room
+import com.example.where_to_eat.helpers.RestaurantsApi
 //import com.example.where_to_eat.models.AppDatabase
-import kotlinx.android.synthetic.main.restaurant_card.view.*
 
 class ListingFragment : Fragment() {
 //    var btn: Button? = null
@@ -88,9 +78,10 @@ class ListingFragment : Fragment() {
             // RecyclerView behavior
             layoutManager = LinearLayoutManager(activity)
             // set the custom adapter to the RecyclerView
-            restaurants = getRestaurants()
+//            restaurants = getRestaurants()
+            restaurants = RestaurantsApi.getRestaurants()
             restaurantsToList = restaurants
-            adapter = RecyclerAdapter(this@ListingFragment.requireContext() , restaurantsToList) //not good
+            adapter = RecyclerAdapter(false, this@ListingFragment.requireContext() , restaurantsToList) //not good
 //            adapter = RecyclerAdapter(this@ListingFragment.requireContext() , getRestaurants())
 
         }
@@ -148,50 +139,50 @@ class ListingFragment : Fragment() {
 //            }
 //        }
 //    }
-    companion object {
-        fun newInstance(): ListingFragment {
-            return ListingFragment()
-        }
-    }
+//    companion object {
+//        fun newInstance(): ListingFragment {
+//            return ListingFragment()
+//        }
+//    }
 
-    private fun getRestaurants(): ArrayList<Restaurants.Restaurant> {
-
-        val service = Retrofit.Builder()
-            .baseUrl("https://ratpark-api.imok.space/")
-            .addConverterFactory(MoshiConverterFactory.create())
-            .client(OkHttpClient.Builder().build())
-            .build()
-            .create(RestaurantsService::class.java)
-
-        val requestCall = service.getRestaurantList()
-        var restaurantList = arrayListOf<Restaurants.Restaurant>()
-
-//        requestCall.execute(object : Callback<Restaurants> {
-//            val z= 0
-//            override fun onResponse(call: Call<Restaurants>, response: Response<Restaurants>) {
-//                Log.d("Response", "onResponse: ${response.body()}")
-//                if (response.isSuccessful){
-//                    restaurantList.addAll(response.body()!!.restaurants!!)
-//                    val y= 0
+//    fun getRestaurants(): ArrayList<Restaurants.Restaurant> {
 //
-//                    Log.d("Response", "country list size : ${restaurantsToList.size}")
-//                }else{
-////                    Toast.makeText(this@ListingFragment, "Something went wrong ${response.message()}", Toast.LENGTH_SHORT).show()
-//                    val y= 0
+//        val service = Retrofit.Builder()
+//            .baseUrl("https://ratpark-api.imok.space/")
+//            .addConverterFactory(MoshiConverterFactory.create())
+//            .client(OkHttpClient.Builder().build())
+//            .build()
+//            .create(RestaurantsService::class.java)
 //
-//                }
-//            }
-//            override fun onFailure(call: Call<Restaurants>, t: Throwable) {
-//                val x= 0
-//            }
-//        })
-
-
-        val resp:Response<Restaurants> =  requestCall.execute()
-        restaurantList.addAll(resp.body()!!.restaurants!!)
-//        Thread.sleep(3000)
-        return restaurantList
-    }
+//        val requestCall = service.getRestaurantList()
+//        var restaurantList = arrayListOf<Restaurants.Restaurant>()
+//
+////        requestCall.execute(object : Callback<Restaurants> {
+////            val z= 0
+////            override fun onResponse(call: Call<Restaurants>, response: Response<Restaurants>) {
+////                Log.d("Response", "onResponse: ${response.body()}")
+////                if (response.isSuccessful){
+////                    restaurantList.addAll(response.body()!!.restaurants!!)
+////                    val y= 0
+////
+////                    Log.d("Response", "country list size : ${restaurantsToList.size}")
+////                }else{
+//////                    Toast.makeText(this@ListingFragment, "Something went wrong ${response.message()}", Toast.LENGTH_SHORT).show()
+////                    val y= 0
+////
+////                }
+////            }
+////            override fun onFailure(call: Call<Restaurants>, t: Throwable) {
+////                val x= 0
+////            }
+////        })
+//
+//
+//        val resp:Response<Restaurants> =  requestCall.execute()
+//        restaurantList.addAll(resp.body()!!.restaurants!!)
+////        Thread.sleep(3000)
+//        return restaurantList
+//    }
 }
 
 

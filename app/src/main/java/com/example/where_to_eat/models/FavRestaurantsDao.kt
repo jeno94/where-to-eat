@@ -18,6 +18,6 @@ interface FavRestaurantsDao {
     @Insert
     fun insertAll(vararg favRes: FavRestaurants)
 
-//    @Delete
-//    fun delete(favRe: FavRestaurants)
+    @Delete
+    fun delete(favRe: FavRestaurants)
 }
