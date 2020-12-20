@@ -10,11 +10,6 @@ interface FavRestaurantsDao {
     @Query("SELECT * FROM favRestaurants")
     fun getAll(): List<FavRestaurants>
 
-//    @Query("SELECT * FROM favRestaurants WHERE rid IN (:favIds)")
-//    fun loadAllByIds(favIds: IntArray): List<FavRestaurants>
-//
-//
-//
     @Insert
     fun insertAll(vararg favRes: FavRestaurants)
 

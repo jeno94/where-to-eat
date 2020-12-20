@@ -32,36 +32,8 @@ class ProfileFragment() : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-//        profileViewModel =
-//            ViewModelProviders.of(this).get(ProfileViewModel::class.java)
-//        val root = inflater.inflate(R.layout.fragment_profile, container, false)
-////        val textView: TextView = root.findViewById(R.id.text_notifications)
-////        profileViewModel.text.observe(viewLifecycleOwner, Observer {
-////            textView.text = it
-////        })
-//
-//        return root
-
 
         val view: View = inflater!!.inflate(R.layout.fragment_profile, container, false)
-//        btn = view.findViewById(R.id.favBtn)
-//
-//        btn?.setOnClickListener{
-//            Log.d("Response", "country list size : $it")
-//
-//        }
-
-//    val clickListener = View.OnClickListener{ view->
-//        var x = null
-//        Log.d("Test", "view: ${view.id}")
-//    }
-//        btn?.setOnClickListener(clickListener)
-
-
-
-
-
-//        return inflater.inflate(R.layout.fragment_listing, container, false)
 
         return view
     }
@@ -105,47 +77,4 @@ class ProfileFragment() : Fragment() {
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-//    override fun onCreateView(
-//        inflater: LayoutInflater, container: ViewGroup?,
-//        savedInstanceState: Bundle?
-//    ): View? {
-//        // Inflate the layout for this fragment
-////        restaurants = getRestaurants()
-////        restaurantsToList = restaurants
-//
-//        return inflater.inflate(R.layout.fragment_profile, container, false)
-//    }
-//
-//    override fun onViewCreated(itemView: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(itemView, savedInstanceState)
-//
-//        val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
-//        StrictMode.setThreadPolicy(policy)
-//        recycler_view.apply {
-//            // set a LinearLayoutManager to handle Android
-//            // RecyclerView behavior
-//            layoutManager = LinearLayoutManager(activity)
-//            // set the custom adapter to the RecyclerView
-////            restaurants = getRestaurants()
-////            restaurantsToList = restaurants
-//
-////            ListingFragment
-//            adapter = RecyclerAdapter(this@ProfileFragment.requireContext() , "") //not good
-////            adapter = RecyclerAdapter(this@ListingFragment.requireContext() , getRestaurants())
-//
-//        }
-//    }
 }

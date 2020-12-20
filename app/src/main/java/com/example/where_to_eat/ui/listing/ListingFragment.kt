@@ -13,6 +13,7 @@ import com.example.where_to_eat.models.RecyclerAdapter
 import com.example.wheretoeat.ui.listing.ListingViewModel
 import kotlinx.android.synthetic.main.fragment_listing.*
 import com.example.where_to_eat.helpers.RestaurantsApi
+
 //import com.example.where_to_eat.models.AppDatabase
 
 class ListingFragment : Fragment() {
@@ -28,45 +29,18 @@ class ListingFragment : Fragment() {
     private var layoutManager: RecyclerView.LayoutManager? = null
     private var adapter: RecyclerView.Adapter<RecyclerAdapter.ViewHolder>? = null
 
-//    val db = Room.databaseBuilder(
-//            applicationContext,
-//            AppDatabase::class.java, "database-name"
-//    ).build()
-
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-//        restaurants = getRestaurants()
-//        restaurantsToList = restaurants
 
 //        val view: View = inflater.inflate(R.layout.fragment_listing, container, false)
         val view: View = inflater!!.inflate(R.layout.fragment_listing, container, false)
-//        btn = view.findViewById(R.id.favBtn)
-//
-//        btn?.setOnClickListener{
-//            Log.d("Response", "country list size : $it")
-//
-//        }
-
-//    val clickListener = View.OnClickListener{ view->
-//        var x = null
-//        Log.d("Test", "view: ${view.id}")
-//    }
-//        btn?.setOnClickListener(clickListener)
-
-
-
-
-
-//        return inflater.inflate(R.layout.fragment_listing, container, false)
 
         return view
     }
-    
+
 
     override fun onViewCreated(itemView: View, savedInstanceState: Bundle?) {
         super.onViewCreated(itemView, savedInstanceState)
@@ -77,13 +51,11 @@ class ListingFragment : Fragment() {
             // set a LinearLayoutManager to handle Android
             // RecyclerView behavior
             layoutManager = LinearLayoutManager(activity)
-            // set the custom adapter to the RecyclerView
 //            restaurants = getRestaurants()
             restaurants = RestaurantsApi.getRestaurants()
             restaurantsToList = restaurants
-            adapter = RecyclerAdapter(false, this@ListingFragment.requireContext() , restaurantsToList) //not good
-//            adapter = RecyclerAdapter(this@ListingFragment.requireContext() , getRestaurants())
-
+            // set the custom adapter to the RecyclerView
+            adapter = RecyclerAdapter(false, this@ListingFragment.requireContext(), restaurantsToList) //not good
         }
     }
 
@@ -128,61 +100,6 @@ class ListingFragment : Fragment() {
 //    }
 
 
-
-
-//    override fun onClick(v: View?) {
-//        when (v?.id) {
-//            R.id.favBtn -> {
-//
-//            }
-//            else -> {
-//            }
-//        }
-//    }
-//    companion object {
-//        fun newInstance(): ListingFragment {
-//            return ListingFragment()
-//        }
-//    }
-
-//    fun getRestaurants(): ArrayList<Restaurants.Restaurant> {
-//
-//        val service = Retrofit.Builder()
-//            .baseUrl("https://ratpark-api.imok.space/")
-//            .addConverterFactory(MoshiConverterFactory.create())
-//            .client(OkHttpClient.Builder().build())
-//            .build()
-//            .create(RestaurantsService::class.java)
-//
-//        val requestCall = service.getRestaurantList()
-//        var restaurantList = arrayListOf<Restaurants.Restaurant>()
-//
-////        requestCall.execute(object : Callback<Restaurants> {
-////            val z= 0
-////            override fun onResponse(call: Call<Restaurants>, response: Response<Restaurants>) {
-////                Log.d("Response", "onResponse: ${response.body()}")
-////                if (response.isSuccessful){
-////                    restaurantList.addAll(response.body()!!.restaurants!!)
-////                    val y= 0
-////
-////                    Log.d("Response", "country list size : ${restaurantsToList.size}")
-////                }else{
-//////                    Toast.makeText(this@ListingFragment, "Something went wrong ${response.message()}", Toast.LENGTH_SHORT).show()
-////                    val y= 0
-////
-////                }
-////            }
-////            override fun onFailure(call: Call<Restaurants>, t: Throwable) {
-////                val x= 0
-////            }
-////        })
-//
-//
-//        val resp:Response<Restaurants> =  requestCall.execute()
-//        restaurantList.addAll(resp.body()!!.restaurants!!)
-////        Thread.sleep(3000)
-//        return restaurantList
-//    }
 }
 
 

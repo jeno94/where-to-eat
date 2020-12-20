@@ -80,8 +80,7 @@ class RecyclerAdapter(
         viewHolder.itemAddress.text = list[i].address
         viewHolder.itemPrice.text = list[i].price.toString()
         viewHolder.itemImage.setImageBitmap(getBitMapFromURL(list[i].image_url))
-//        val index = favList.findIndex(it -> it.restaurant_id == list[i].id )
-//        val isInFavorites = favList.indexOf() { it -> it.restaurant_id == list[i].id }
+
         val index = favList.indexOfFirst { it -> it.restaurant_id == list[i].id }
 
         if (index != -1) {
